@@ -1,0 +1,79 @@
+<h3>TAMBAH DATA MATA KULIAH</h3>
+<form method="post" action="tambah aksi_mk.php">
+    <table>
+        <tr>
+            <td>Kode Matkul</td>
+            <td><input type="text" name="kode_mk"></td>
+        </tr>
+        <tr>
+            <td>Nama Matkul</td>
+            <td><input type="text" name="nama_mk"></td>
+        </tr>
+        <tr>			
+            <td>Semester</td>
+            <td><input type="text" name="semester"></td>
+        </tr>
+        <tr>
+            <td>Jumlah SKS</td>
+            <td><input type="text" name="jumlah_sks"></td>
+        </tr>
+            <td><input type="submit" value="SIMPAN"></td>
+        </tr>		
+    </table>
+</form>
+<!DOCTYPE html>
+<html>
+<head>
+	<title>CRUD PHP dan MySQLi</title>
+</head>
+<body>
+ 
+	<h2>CRUD DATA MAHASISWA</h2>
+	<br/>
+	<a href="index.php">KEMBALI</a>
+	<br/>
+	<br/>
+	<h3>EDIT DATA MAHASISWA</h3>
+ 
+	<?php
+	include 'koneksi.php';
+	$npm = $_GET['npm'];
+	$data = mysqli_query($koneksi,"select * from mahasiswa where npm='$npm'");
+	while($d = mysqli_fetch_array($data)){
+		?>
+		<form method="post" action="update_mk.php">
+			<table>
+				<tr>			
+					<td>Nama</td>
+					<td>
+						<input type="hidden" name="npm" value="<?php echo $d['npm']; ?>">
+						<input type="text" name="nama" value="<?php echo $d['nama']; ?>">
+					</td>
+				</tr>
+                
+                    
+                        <tr>
+                            <td>Kode Matkul</td>
+                           <td>
+                            <input type="hidden" name="kode_mk" value="<?php echo $d['kode_mk']; ?>">
+						<input type="text" name="nama_mk" value="<?php echo $d['nama_mk']; ?>"></td>
+                        </tr>
+                        
+                        <tr>			
+                            <td>Semester</td>
+                            <td><input type="text" name="semester"></td>
+                        </tr>
+                        <tr>
+                            <td>Jumlah SKS</td>
+                            <td><input type="text" name="jumlah_sks"></td>
+                        </tr>
+                            <td><input type="submit" value="SIMPAN"></td>
+                        </tr>		
+                    </table>
+                </form>
+		<?php 
+	}
+	?>
+	
+</body>
+</html>
